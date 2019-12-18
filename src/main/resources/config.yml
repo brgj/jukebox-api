@@ -1,16 +1,23 @@
-template: Hello, %s!
-defaultName: Stranger
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  gzipEnabled: true
+  gzipEnabledForRequests: true
+  timeout: 2000ms
+  connectionTimeout: 500ms
+  timeToLive: 1 hour
+  cookiesEnabled: false
+  maxConnections: 1024
+  maxConnectionsPerRoute: 1024
+  keepAlive: 0s
 
-database:
-  driverClass: org.h2.Driver
-  user: sa
-  password: sa
-  url: jdbc:h2:./target/test-example
+upstream-jukes: 'http://my-json-server.typicode.com/touchtunes/tech-assignment/jukes'
+upstream-settings: 'http://my-json-server.typicode.com/touchtunes/tech-assignment/settings'
 
 server:
   applicationConnectors:
     - type: http
-      port: 0
+      port: 8080
   adminConnectors:
     - type: http
       port: 0

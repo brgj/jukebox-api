@@ -117,7 +117,7 @@
           <transformers>
             <transformer />
             <transformer>
-              <mainClass>com.example.helloworld.HelloWorldApplication</mainClass>
+              <mainClass>xyz.bradjohnson.jukebox.JukeboxApplication</mainClass>
             </transformer>
           </transformers>
         </configuration>
