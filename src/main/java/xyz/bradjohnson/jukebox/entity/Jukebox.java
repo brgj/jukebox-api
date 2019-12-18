@@ -14,7 +14,7 @@ public class Jukebox implements Entity {
     private Component[] components;
 
     @Data
-    private static class Component {
+    public static class Component {
         private String name;
     }
 }

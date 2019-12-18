@@ -9,12 +9,12 @@ import xyz.bradjohnson.jukebox.repository.JukeboxRepository;
 import xyz.bradjohnson.jukebox.repository.SettingsRepository;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+import javax.ws.rs.core.Response;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Path("/jukebox")
 @Produces(MediaType.APPLICATION_JSON)
@@ -32,19 +32,39 @@ public class JukeboxResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJukebox(@QueryParam("settingId")
+    public Response getJukebox(@QueryParam("settingId")
                                      String settingId,
                              @Optional
                              @QueryParam("model")
                                      String model,
                              @Optional
                              @QueryParam("offset")
+                             @DefaultValue("0")
                                      Integer offset,
                              @Optional
                              @QueryParam("limit")
+                             @DefaultValue("10")
                                      Integer limit) {
-        List<Jukebox> jukes = this.jukeboxRepo.list();
+        Predicate<Jukebox> jukeCond = model == null ? jukebox -> true : jukebox -> jukebox.getModel().equals(model);
+        List<Jukebox> jukes = this.jukeboxRepo.list(jukeCond);
+
         List<Settings> settingsList = this.settingsRepo.list(settings -> settings.getId().equals(settingId));
-        return null;
+
+        Set<String> requiredComponents = settingsList.stream()
+                .flatMap(settings -> Arrays.stream(settings.getRequirements()))
+                .collect(Collectors.toSet());
+
+        jukes = jukes.stream()
+                .filter(jukebox -> {
+                    Set<String> actualComponents = Arrays.stream(jukebox.getComponents())
+                            .map(Jukebox.Component::getName)
+                            .collect(Collectors.toSet());
+                    return actualComponents.containsAll(requiredComponents);
+                })
+                .skip(offset)
+                .limit(limit)
+        .collect(Collectors.toList());
+
+        return Response.status(Response.Status.OK).entity(jukes.toArray()).build();
     }
 }
