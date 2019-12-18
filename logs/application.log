@@ -130,3 +130,150 @@ INFO  [2019-12-18 01:45:00,255] org.eclipse.jetty.server.AbstractConnector: Stop
 INFO  [2019-12-18 01:45:00,256] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a1d6a2e{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
 INFO  [2019-12-18 01:45:00,259] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@60e7ebf5{/,null,UNAVAILABLE}
 INFO  [2019-12-18 01:45:00,265] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@693fd112{/,null,UNAVAILABLE}
+INFO  [2019-12-18 01:56:27,755] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2019-12-18 01:56:27,761] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2019-12-18 01:56:27,762] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2019-12-18 01:56:27,933] org.hibernate.Version: HHH000412: Hibernate Core {5.4.10.Final}
+INFO  [2019-12-18 01:56:28,108] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [com.example.helloworld.core.Person]
+INFO  [2019-12-18 01:56:28,153] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+INFO  [2019-12-18 01:56:28,774] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2019-12-18 01:56:29,819] io.dropwizard.server.ServerFactory: Starting hello-world
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+INFO  [2019-12-18 01:56:29,941] org.eclipse.jetty.setuid.SetUIDListener: Opened application@1fdd7b2d{HTTP/1.1,[http/1.1]}{0.0.0.0:46057}
+INFO  [2019-12-18 01:56:29,941] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@29601d11{HTTP/1.1,[http/1.1]}{0.0.0.0:36689}
+INFO  [2019-12-18 01:56:29,944] org.eclipse.jetty.server.Server: jetty-9.4.24.v20191120; built: 2019-11-20T21:37:49.771Z; git: 363d5f2df3a8a28de40604320230664b9c793c16; jvm 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10
+INFO  [2019-12-18 01:56:30,774] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.helloworld.resources.HelloWorldResource)
+    POST    /hello-world (com.example.helloworld.resources.HelloWorldResource)
+    GET     /hello-world/date (com.example.helloworld.resources.HelloWorldResource)
+    GET     /people (com.example.helloworld.resources.PeopleResource)
+    POST    /people (com.example.helloworld.resources.PeopleResource)
+    GET     /protected (com.example.helloworld.resources.ProtectedResource)
+    GET     /protected/admin (com.example.helloworld.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (com.example.helloworld.resources.ViewResource)
+    GET     /views/iso88591.mustache (com.example.helloworld.resources.ViewResource)
+    GET     /views/utf8.ftl (com.example.helloworld.resources.ViewResource)
+    GET     /views/utf8.mustache (com.example.helloworld.resources.ViewResource)
+
+INFO  [2019-12-18 01:56:30,776] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@2e0f1388{/,null,AVAILABLE}
+INFO  [2019-12-18 01:56:30,780] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2019-12-18 01:56:30,788] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@315dd34e{/,null,AVAILABLE}
+INFO  [2019-12-18 01:56:30,800] org.eclipse.jetty.server.AbstractConnector: Started application@1fdd7b2d{HTTP/1.1,[http/1.1]}{0.0.0.0:46057}
+INFO  [2019-12-18 01:56:30,802] org.eclipse.jetty.server.AbstractConnector: Started admin@29601d11{HTTP/1.1,[http/1.1]}{0.0.0.0:36689}
+INFO  [2019-12-18 01:56:30,802] org.eclipse.jetty.server.Server: Started @6160ms
+INFO  [2019-12-18 01:56:31,904] liquibase.executor.jvm.JdbcExecutor: SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK
+INFO  [2019-12-18 01:56:31,931] liquibase.executor.jvm.JdbcExecutor: CREATE TABLE PUBLIC.DATABASECHANGELOGLOCK (ID INT NOT NULL, LOCKED BOOLEAN NOT NULL, LOCKGRANTED TIMESTAMP, LOCKEDBY VARCHAR(255), CONSTRAINT PK_DATABASECHANGELOGLOCK PRIMARY KEY (ID))
+INFO  [2019-12-18 01:56:31,940] liquibase.executor.jvm.JdbcExecutor: SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK
+INFO  [2019-12-18 01:56:31,944] liquibase.executor.jvm.JdbcExecutor: DELETE FROM PUBLIC.DATABASECHANGELOGLOCK
+INFO  [2019-12-18 01:56:31,945] liquibase.executor.jvm.JdbcExecutor: INSERT INTO PUBLIC.DATABASECHANGELOGLOCK (ID, LOCKED) VALUES (1, FALSE)
+INFO  [2019-12-18 01:56:31,949] liquibase.executor.jvm.JdbcExecutor: SELECT LOCKED FROM PUBLIC.DATABASECHANGELOGLOCK WHERE ID=1
+INFO  [2019-12-18 01:56:31,958] liquibase.lockservice.StandardLockService: Successfully acquired change log lock
+INFO  [2019-12-18 01:56:32,978] liquibase.changelog.StandardChangeLogHistoryService: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2019-12-18 01:56:32,980] liquibase.executor.jvm.JdbcExecutor: CREATE TABLE PUBLIC.DATABASECHANGELOG (ID VARCHAR(255) NOT NULL, AUTHOR VARCHAR(255) NOT NULL, FILENAME VARCHAR(255) NOT NULL, DATEEXECUTED TIMESTAMP NOT NULL, ORDEREXECUTED INT NOT NULL, EXECTYPE VARCHAR(10) NOT NULL, MD5SUM VARCHAR(35), DESCRIPTION VARCHAR(255), COMMENTS VARCHAR(255), TAG VARCHAR(255), LIQUIBASE VARCHAR(20), CONTEXTS VARCHAR(255), LABELS VARCHAR(255), DEPLOYMENT_ID VARCHAR(10))
+INFO  [2019-12-18 01:56:32,981] liquibase.executor.jvm.JdbcExecutor: SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG
+INFO  [2019-12-18 01:56:32,981] liquibase.changelog.StandardChangeLogHistoryService: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2019-12-18 01:56:32,982] liquibase.executor.jvm.JdbcExecutor: SELECT * FROM PUBLIC.DATABASECHANGELOG ORDER BY DATEEXECUTED ASC, ORDEREXECUTED ASC
+INFO  [2019-12-18 01:56:32,983] liquibase.executor.jvm.JdbcExecutor: SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK
+INFO  [2019-12-18 01:56:32,993] liquibase.executor.jvm.JdbcExecutor: CREATE TABLE PUBLIC.people (id BIGINT AUTO_INCREMENT NOT NULL, fullName VARCHAR(255) NOT NULL, jobTitle VARCHAR(255), CONSTRAINT PK_PEOPLE PRIMARY KEY (id))
+INFO  [2019-12-18 01:56:33,000] liquibase.changelog.ChangeSet: Table people created
+INFO  [2019-12-18 01:56:33,000] liquibase.changelog.ChangeSet: ChangeSet migrations.xml::1::codahale ran successfully in 8ms
+INFO  [2019-12-18 01:56:33,001] liquibase.executor.jvm.JdbcExecutor: SELECT MAX(ORDEREXECUTED) FROM PUBLIC.DATABASECHANGELOG
+INFO  [2019-12-18 01:56:33,010] liquibase.executor.jvm.JdbcExecutor: INSERT INTO PUBLIC.DATABASECHANGELOG (ID, AUTHOR, FILENAME, DATEEXECUTED, ORDEREXECUTED, MD5SUM, DESCRIPTION, COMMENTS, EXECTYPE, CONTEXTS, LABELS, LIQUIBASE, DEPLOYMENT_ID) VALUES ('1', 'codahale', 'migrations.xml', NOW(), 1, '8:a466b7f04155c06f80453d6d5a36b55c', 'createTable tableName=people', '', 'EXECUTED', NULL, NULL, '3.8.2', '6634192983')
+INFO  [2019-12-18 01:56:33,026] liquibase.lockservice.StandardLockService: Successfully released change log lock
+INFO  [2019-12-18 01:56:33,289] org.eclipse.jetty.util.TypeUtil: JVM Runtime does not support Modules
+INFO  [2019-12-18 01:56:33,514] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    52982 nanoseconds spent acquiring 1 JDBC connections;
+    36331 nanoseconds spent releasing 1 JDBC connections;
+    5391961 nanoseconds spent preparing 1 JDBC statements;
+    1248219 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    7690073 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2019-12-18 01:56:33,667] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    45237 nanoseconds spent acquiring 1 JDBC connections;
+    30787 nanoseconds spent releasing 1 JDBC connections;
+    70461 nanoseconds spent preparing 1 JDBC statements;
+    654774 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    154264 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2019-12-18 01:56:33,677] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    43279 nanoseconds spent acquiring 1 JDBC connections;
+    29855 nanoseconds spent releasing 1 JDBC connections;
+    54999 nanoseconds spent preparing 1 JDBC statements;
+    245900 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    165419 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2019-12-18 01:56:33,719] org.eclipse.jetty.server.AbstractConnector: Stopped application@1fdd7b2d{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2019-12-18 01:56:33,720] org.eclipse.jetty.server.AbstractConnector: Stopped admin@29601d11{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2019-12-18 01:56:33,722] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@315dd34e{/,null,UNAVAILABLE}
+INFO  [2019-12-18 01:56:33,728] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@2e0f1388{/,null,UNAVAILABLE}
+INFO  [2019-12-18 02:06:07,934] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2019-12-18 02:06:07,937] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2019-12-18 02:06:07,938] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2019-12-18 02:06:08,072] org.hibernate.Version: HHH000412: Hibernate Core {5.4.10.Final}
+INFO  [2019-12-18 02:06:08,220] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [com.example.helloworld.core.Person]
+INFO  [2019-12-18 02:06:08,255] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+INFO  [2019-12-18 02:06:08,778] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2019-12-18 02:06:09,799] io.dropwizard.server.ServerFactory: Starting hello-world
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+INFO  [2019-12-18 02:06:09,909] org.eclipse.jetty.setuid.SetUIDListener: Opened application@62794582{HTTP/1.1,[http/1.1]}{0.0.0.0:40471}
+INFO  [2019-12-18 02:06:09,910] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@c82ad22{HTTP/1.1,[http/1.1]}{0.0.0.0:44887}
+INFO  [2019-12-18 02:06:09,912] org.eclipse.jetty.server.Server: jetty-9.4.24.v20191120; built: 2019-11-20T21:37:49.771Z; git: 363d5f2df3a8a28de40604320230664b9c793c16; jvm 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10
+INFO  [2019-12-18 02:06:10,540] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.helloworld.resources.HelloWorldResource)
+    POST    /hello-world (com.example.helloworld.resources.HelloWorldResource)
+    GET     /hello-world/date (com.example.helloworld.resources.HelloWorldResource)
+    GET     /people (com.example.helloworld.resources.PeopleResource)
+    POST    /people (com.example.helloworld.resources.PeopleResource)
+    GET     /protected (com.example.helloworld.resources.ProtectedResource)
+    GET     /protected/admin (com.example.helloworld.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (com.example.helloworld.resources.ViewResource)
+    GET     /views/iso88591.mustache (com.example.helloworld.resources.ViewResource)
+    GET     /views/utf8.ftl (com.example.helloworld.resources.ViewResource)
+    GET     /views/utf8.mustache (com.example.helloworld.resources.ViewResource)
+
+INFO  [2019-12-18 02:06:10,544] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@1fab0394{/,null,AVAILABLE}
+INFO  [2019-12-18 02:06:10,548] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2019-12-18 02:06:10,554] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@510e6b93{/,null,AVAILABLE}
+INFO  [2019-12-18 02:06:10,564] org.eclipse.jetty.server.AbstractConnector: Started application@62794582{HTTP/1.1,[http/1.1]}{0.0.0.0:40471}
+INFO  [2019-12-18 02:06:10,566] org.eclipse.jetty.server.AbstractConnector: Started admin@c82ad22{HTTP/1.1,[http/1.1]}{0.0.0.0:44887}
+INFO  [2019-12-18 02:06:10,566] org.eclipse.jetty.server.Server: Started @4660ms
+INFO  [2019-12-18 02:06:44,273] org.eclipse.jetty.util.TypeUtil: JVM Runtime does not support Modules
