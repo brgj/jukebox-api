@@ -3,6 +3,7 @@ package xyz.bradjohnson.jukebox.configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.JerseyClientConfiguration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -22,4 +23,9 @@ public class JukeboxConfiguration extends Configuration {
     @NotNull
     @JsonProperty("upstream-settings")
     private String upstreamSettings;
+
+    @Valid
+    @NotNull
+    @JsonProperty("swagger")
+    private SwaggerBundleConfiguration swaggerBundleConfiguration;
 }

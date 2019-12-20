@@ -1,5 +1,6 @@
 package xyz.bradjohnson.jukebox.resource;
 
+import io.swagger.annotations.Api;
 import org.jvnet.hk2.annotations.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,8 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Path("/jukebox")
+@Path("/")
+@Api(value = "Jukebox Retrieval")
 @Produces(MediaType.APPLICATION_JSON)
 public class JukeboxResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(JukeboxResource.class);
@@ -32,6 +34,7 @@ public class JukeboxResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("jukebox")
     public Response getJukebox(@QueryParam("settingId")
                                      String settingId,
                              @Optional

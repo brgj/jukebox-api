@@ -3,6 +3,8 @@ package xyz.bradjohnson.jukebox;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import xyz.bradjohnson.jukebox.configuration.ExternalBundle;
 import xyz.bradjohnson.jukebox.configuration.JukeboxConfiguration;
@@ -32,6 +34,12 @@ public class JukeboxApplication extends Application<JukeboxConfiguration> {
     @Override
     public void initialize(Bootstrap<JukeboxConfiguration> bootstrap) {
         bootstrap.addBundle(externalBundle);
+        bootstrap.addBundle(new SwaggerBundle<JukeboxConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JukeboxConfiguration configuration) {
+                return configuration.getSwaggerBundleConfiguration();
+            }
+        });
     }
 
     @Override
@@ -46,6 +54,7 @@ public class JukeboxApplication extends Application<JukeboxConfiguration> {
                 this.bindAsContract(SettingsRepository.class);
             }
         });
+
 
         environment.jersey().register(JukeboxResource.class);
     }

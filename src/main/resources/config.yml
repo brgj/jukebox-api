@@ -20,7 +20,7 @@ server:
       port: 8080
   adminConnectors:
     - type: http
-      port: 0
+      port: 8081
 
 # Logging settings.
 logging:
@@ -33,4 +33,7 @@ logging:
       archive: true
       archivedFileCount: 7
       maxFileSize: '1MiB'
+
+swagger:
+  resourcePackage: "xyz.bradjohnson.jukebox.resource"
 
