@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Persistence contract implementation for Settings
+ */
 public class SettingsRepository implements Repository<Settings> {
 
     WebTarget settingsTarget;
@@ -30,7 +33,7 @@ public class SettingsRepository implements Repository<Settings> {
 
     @Override
     public List<Settings> list() {
-        return Arrays.asList(this.settingsTarget.request(MediaType.APPLICATION_JSON).get(Settings[].class));
+        return Arrays.asList(this.settingsTarget.request(MediaType.APPLICATION_JSON).get(Settings.SuperSettings.class).getSettings());
     }
 
     @Override

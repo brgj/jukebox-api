@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.validation.Valid;
 
+/**
+ * Entity object for Jukebox
+ */
 @Data
 public class Jukebox implements Entity {
     private String id;

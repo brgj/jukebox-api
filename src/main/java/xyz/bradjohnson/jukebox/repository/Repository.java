@@ -5,6 +5,9 @@ import xyz.bradjohnson.jukebox.entity.Entity;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * Persistence contract
+ */
 public interface Repository<T extends Entity> {
     T getById(int id);
 

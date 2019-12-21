@@ -9,6 +9,9 @@ import lombok.Data;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Configuration reader for the config.yml resources file
+ */
 @Data
 public class JukeboxConfiguration extends Configuration {
     @Valid

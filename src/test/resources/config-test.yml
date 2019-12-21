@@ -1,0 +1,39 @@
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  gzipEnabled: true
+  gzipEnabledForRequests: true
+  timeout: 2000ms
+  connectionTimeout: 500ms
+  timeToLive: 1 hour
+  cookiesEnabled: false
+  maxConnections: 1024
+  maxConnectionsPerRoute: 1024
+  keepAlive: 0s
+
+upstream-jukes: 'http://my-json-server.typicode.com/touchtunes/tech-assignment/jukes'
+upstream-settings: 'http://my-json-server.typicode.com/touchtunes/tech-assignment/settings'
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+# Logging settings.
+logging:
+  level: INFO
+  appenders:
+    - type: console
+    - type: file
+      currentLogFilename: './logs/application.log'
+      archivedLogFilenamePattern: './logs/application-%d-%i.log.gz'
+      archive: true
+      archivedFileCount: 7
+      maxFileSize: '1MiB'
+
+swagger:
+  resourcePackage: "xyz.bradjohnson.jukebox.resource"
+

@@ -11,9 +11,13 @@ import xyz.bradjohnson.jukebox.configuration.JukeboxConfiguration;
 import xyz.bradjohnson.jukebox.repository.JukeboxRepository;
 import xyz.bradjohnson.jukebox.repository.SettingsRepository;
 import xyz.bradjohnson.jukebox.resource.JukeboxResource;
+import xyz.bradjohnson.jukebox.service.JukeboxService;
 
 import javax.ws.rs.client.WebTarget;
 
+/**
+ * Main class for starting the API
+ */
 public class JukeboxApplication extends Application<JukeboxConfiguration> {
 
     ExternalBundle externalBundle;
@@ -42,14 +46,16 @@ public class JukeboxApplication extends Application<JukeboxConfiguration> {
         });
     }
 
+
     @Override
     public void run(JukeboxConfiguration configuration, Environment environment) {
+        // Make dependencies available via HK2 Dependency Injection
         environment.jersey().register(new AbstractBinder() {
-
             @Override
             protected void configure() {
                 this.bind(JukeboxApplication.this.externalBundle.getJukeboxTarget()).named("jukebox").to(WebTarget.class);
                 this.bind(JukeboxApplication.this.externalBundle.getSettingsTarget()).named("settings").to(WebTarget.class);
+                this.bindAsContract(JukeboxService.class);
                 this.bindAsContract(JukeboxRepository.class);
                 this.bindAsContract(SettingsRepository.class);
             }

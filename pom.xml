@@ -150,6 +150,8 @@
                     <archive>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>xyz.bradjohnson.jukebox.JukeboxApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Persistence contract implementation for Jukebox
+ */
 public class JukeboxRepository implements Repository<Jukebox> {
 
     WebTarget jukeboxTarget;

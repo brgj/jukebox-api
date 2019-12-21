@@ -1,73 +1,86 @@
 package xyz.bradjohnson.jukebox.resource;
 
 import io.swagger.annotations.Api;
-import org.jvnet.hk2.annotations.Optional;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.util.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.bradjohnson.jukebox.entity.Jukebox;
-import xyz.bradjohnson.jukebox.entity.Settings;
-import xyz.bradjohnson.jukebox.repository.JukeboxRepository;
-import xyz.bradjohnson.jukebox.repository.SettingsRepository;
+import xyz.bradjohnson.jukebox.service.JukeboxService;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
+/**
+ * API class for jukebox microservice
+ */
 @Path("/")
-@Api(value = "Jukebox Retrieval")
+@Api(value = "Jukebox Api", tags = {"Jukebox-Filter"})
 @Produces(MediaType.APPLICATION_JSON)
 public class JukeboxResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(JukeboxResource.class);
 
-    private final JukeboxRepository jukeboxRepo;
-    private final SettingsRepository settingsRepo;
+    private final JukeboxService jukeboxService;
 
     @Inject
-    public JukeboxResource(JukeboxRepository jukeboxRepo, SettingsRepository settingsRepo) {
-        this.jukeboxRepo = jukeboxRepo;
-        this.settingsRepo = settingsRepo;
+    public JukeboxResource(JukeboxService jukeboxService) {
+        this.jukeboxService = jukeboxService;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("jukebox")
-    public Response getJukebox(@QueryParam("settingId")
-                                     String settingId,
-                             @Optional
-                             @QueryParam("model")
-                                     String model,
-                             @Optional
-                             @QueryParam("offset")
-                             @DefaultValue("0")
-                                     Integer offset,
-                             @Optional
-                             @QueryParam("limit")
-                             @DefaultValue("10")
-                                     Integer limit) {
-        Predicate<Jukebox> jukeCond = model == null ? jukebox -> true : jukebox -> jukebox.getModel().equals(model);
-        List<Jukebox> jukes = this.jukeboxRepo.list(jukeCond);
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = Jukebox[].class),
+            @ApiResponse(code = 400, message = "Invalid SettingId format", response = String.class),
+            @ApiResponse(code = 404, message = "ID not found", response = String.class),
+            @ApiResponse(code = 500, message = "Internal Server Error")})
+    @ApiParam(value = "settingId", required = true)
+    @ApiOperation(value = "Retrieve a jukebox based on the compatibility with a component setting")
+    public Response getJukebox(
+            @NotNull
+            @QueryParam("settingId")
+                    String settingId,
+            @QueryParam("model")
+                    String model,
+            @QueryParam("offset")
+            @DefaultValue("0")
+                    Long offset,
+            @QueryParam("limit")
+            @DefaultValue("20")
+                    Long limit) {
+        Pattern guidPattern = Pattern.compile("[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}");
 
-        List<Settings> settingsList = this.settingsRepo.list(settings -> settings.getId().equals(settingId));
+        if (!guidPattern.matcher(settingId).find()) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(Json.pretty("SettingId must conform to UUID pattern"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
 
-        Set<String> requiredComponents = settingsList.stream()
-                .flatMap(settings -> Arrays.stream(settings.getRequirements()))
-                .collect(Collectors.toSet());
-
-        jukes = jukes.stream()
-                .filter(jukebox -> {
-                    Set<String> actualComponents = Arrays.stream(jukebox.getComponents())
-                            .map(Jukebox.Component::getName)
-                            .collect(Collectors.toSet());
-                    return actualComponents.containsAll(requiredComponents);
-                })
-                .skip(offset)
-                .limit(limit)
-        .collect(Collectors.toList());
-
-        return Response.status(Response.Status.OK).entity(jukes.toArray()).build();
+        try {
+            return Response
+                    .ok(jukeboxService.getJukeboxes(settingId, model, offset, limit).toArray(), MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (NotFoundException ex) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(Json.pretty(ex.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
     }
 }
