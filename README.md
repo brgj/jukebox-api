@@ -1,5 +1,13 @@
 # Backend Developer tech assignment
 
+## How to run
+
+Generate jar with `mvn clean package install`
+
+Run `java - jar ./target/dropwizard-jukebox-api-2.0.1-SNAPSHOT.jar server src/main/resources/config.yml` from project root
+
+Project will run on port 8080. Visit localhost:8080/swagger for api docs
+
 ## Problem description
 
 Imagine you are building a web application to remote control Jukebox settings. Depending on what components (hardware modules) a jukebox has, it may or may not support a setting (a key-value pair). For example a jukebox with "LED panel" component supports `animation_type` setting or a jukebox which does not have a "money_receiver" component does not support `currency` setting. 
